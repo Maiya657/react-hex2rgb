@@ -2,10 +2,12 @@ import { useState } from 'react';
 import hexToRgb from '../../helpers/hexToRgb';
 
 export function HexToRgbConverter() {
-  const [ rgbText, setRgb ] = useState('rgb()');
+  const rgbTextDefault = 'rgb()';
   const backgroundColorDefault = 'rgb(230, 225, 225)';
-  const [color, setColor] = useState(backgroundColorDefault);
-  const [colorField, setColorField] = useState('');
+
+  const [ rgbText, setRgb ] = useState(rgbTextDefault);
+  const [ color, setColor ] = useState(backgroundColorDefault);
+  const [ colorField, setColorField ] = useState('');
 
   const handleColor = (e) => {
     e.preventDefault();
@@ -23,9 +25,10 @@ export function HexToRgbConverter() {
       setRgb(rgb);
       setColor(rgb);
     }
-    
+
     switch (true) {
       case (hex === ''): 
+        setRgb(rgbTextDefault);
         setColor(backgroundColorDefault);
         break;
       case (/^#[0-9A-Fa-f]{6}$/.test(hex)): 
